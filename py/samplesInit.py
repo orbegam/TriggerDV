@@ -4,11 +4,11 @@ from collections import namedtuple
 NamedTree = namedtuple('NamedTree', ['tree', 'name'])
 
 # Background
-dijet_file = TFile('rpvmcplustrigger_dijetJF17_129160.root')
-ttbar_file = TFile('rpvmcplustrigger_ttbar_110401.root')
+dijet_file = TFile(r'C:\Orb\School\ATLAS\Data\rpvmcplustrigger_dijetJF17_129160.root')
+ttbar_file = TFile(r'C:\Orb\School\ATLAS\Data\rpvmcplustrigger_ttbar_110401.root')
 # Signal
-muon_file = TFile('rpvmcplustrigger_muon_177568.root')
-elec_file = TFile('rpvmcplustrigger_elec_202882.root')
+muon_file = TFile(r'C:\Orb\School\ATLAS\Data\rpvmcplustrigger_muon_177568.root')
+elec_file = TFile(r'C:\Orb\School\ATLAS\Data\rpvmcplustrigger_elec_202882.root')
 
 dijet = dijet_file.RPVMCInfoTree
 ttbar = ttbar_file.RPVMCInfoTree
