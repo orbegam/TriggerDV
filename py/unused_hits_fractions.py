@@ -2,16 +2,15 @@ from __future__ import division
 from ROOT import *
 from samplesInit import elec_new, muon_new, dijet_new, ttbar_new, elec_file_new
 
-var = '(sumpttracksd0uppercut + sumpttracksd0lowercut) / jetroi_et'
-
-elec_new.Draw(var + ' >> elec_bg_uncut', 'jetroimatched == -1')
-elec_new.Draw(var + ' >> elec_sig_uncut', 'jetroimatched != -1')
-muon_new.Draw(var + ' >> muon_bg_uncut', 'jetroimatched == -1')
-muon_new.Draw(var + ' >> muon_sig_uncut', 'jetroimatched != -1')
-dijet_new.Draw(var + ' >> dijet_bg_uncut')
-ttbar_new.Draw(var + ' >> ttbar_bg_uncut')
 
 def DrawVarCut(var, cut):
+    elec_new.Draw(var + ' >> elec_bg_uncut', 'jetroimatched == -1')
+    elec_new.Draw(var + ' >> elec_sig_uncut', 'jetroimatched != -1')
+    muon_new.Draw(var + ' >> muon_bg_uncut', 'jetroimatched == -1')
+    muon_new.Draw(var + ' >> muon_sig_uncut', 'jetroimatched != -1')
+    dijet_new.Draw(var + ' >> dijet_bg_uncut')
+    ttbar_new.Draw(var + ' >> ttbar_bg_uncut')
+
     elec_new.Draw(var + ' >> elec_bg', cut + '&& jetroimatched == -1', '')
     elec_new.Draw(var + ' >> elec_sig', cut + '&& jetroimatched != -1', 'same')
     muon_new.Draw(var + ' >> muon_bg', cut + '&& jetroimatched == -1', 'same')
@@ -72,10 +71,12 @@ def linspace(start, stop, n):
         yield start + h * i
 
 
+var = '(sumpttracksd0uppercut + sumpttracksd0lowercut) / jetroi_et'
 # cut = 'jetroi_unusedhits_trt_fraction > 0.4 && (sumpttracksd0uppercut + sumpttracksd0lowercut) / jetroi_et < 0.3'
-# cut = '(sumpttracksd0uppercut + sumpttracksd0lowercut) / jetroi_et < {0}'.format(jcfCut)
-cut = '1==1'
-cur_elec_bg, cur_elec_sig, cur_muon_bg, cur_muon_sig = DrawVarCut(cut)
+cut = '(sumpttracksd0uppercut + sumpttracksd0lowercut) / jetroi_et < 1'
+# cut = '1==1'
+
+cur_elec_bg, cur_elec_sig, cur_muon_bg, cur_muon_sig = DrawVarCut(var, cut)
 cur_filter_elec_bg, cur_filter_elec_sig, cur_filter_muon_bg, cur_filter_muon_sig = CalcFilteredFractions(cur_elec_bg, cur_elec_sig, cur_muon_bg, cur_muon_sig)
 
 print 'elec total filtered: {0}'.format((cur_elec_bg.GetEntries() + cur_elec_sig.GetEntries()) / (

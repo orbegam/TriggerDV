@@ -6,11 +6,13 @@ max_elec_jcfCut = 0
 max_elec_filter_sig = 0
 max_elec_filter_bg = 0
 
+var = '(sumpttracksd0uppercut + sumpttracksd0lowercut) / jetroi_et'
+
 for jcfCut in list(linspace(0, 1, 10)):
     print jcfCut
     cut = 'jetroi_unusedhits_trt_fraction > 0.4 && (sumpttracksd0uppercut + sumpttracksd0lowercut) / jetroi_et < {0}'.format(jcfCut)
     # cut = '(sumpttracksd0uppercut + sumpttracksd0lowercut) / jetroi_et < {0}'.format(jcfCut)
-    cur_elec_bg, cur_elec_sig, cur_muon_bg, cur_muon_sig = DrawVarCut(cut)
+    cur_elec_bg, cur_elec_sig, cur_muon_bg, cur_muon_sig = DrawVarCut(var, cut)
     cur_filter_elec_bg, cur_filter_elec_sig, cur_filter_muon_bg, cur_filter_muon_sig = CalcFilteredFractions(cur_elec_bg, cur_elec_sig, cur_muon_bg, cur_muon_sig)
 
     print 'elec total filtered: {0}'.format((cur_elec_bg.GetEntries() + cur_elec_sig.GetEntries()) / (
