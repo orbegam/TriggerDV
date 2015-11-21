@@ -15,7 +15,6 @@ ttbar = ttbar_file.RPVMCInfoTree
 muon = muon_file.RPVMCInfoTree
 elec = elec_file.RPVMCInfoTree
 
-
 # Background
 dijet_file_new = TFile(r'C:\Orb\School\ATLAS\Data\TriggerRun2_samples\rpvmcplustrigger_dijetJF17_129160_v1_20150924.root')
 ttbar_file_new = TFile(r"C:\Orb\School\ATLAS\Data\TriggerRun2_samples\rpvmcplustrigger_ttbar_110401_v1_20150924.root")
